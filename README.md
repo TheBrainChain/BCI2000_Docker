@@ -6,10 +6,10 @@ The current example will download and install all source code and packages and t
 
 # Instructions
 
-+ git clone https://github.com/thebrainchain/BCI2000_Docker .
-+ docker build -t bci2000:latest --build-arg svnUSERNAME=%svnUSERNAME% --build-arg svnPASSWORD=%svnPASSWORD% .
++ `git clone https://github.com/thebrainchain/BCI2000_Docker .`
++ `docker build -t bci2000:latest --build-arg svnUSERNAME=%svnUSERNAME% --build-arg svnPASSWORD=%svnPASSWORD% .`
     - Replace %svnUSERNAME% and %svnPASSWORD% with your bci2000.org credentials
-+ mkdir data && docker run -v %CD%\data:C:\trunk\outputDirectory bci2000:latest
++ `mkdir data && docker run -v %CD%\data:C:\trunk\outputDirectory bci2000:latest`
 
 # To test:
 From the host machine (not container)
@@ -21,8 +21,8 @@ From the host machine (not container)
 
 # To modify the solutions that are generated:
 >   - Enter the container:
->       - `docker run -v %CD%\data:C:\trunk\outputDirectory bci2000:latest`
+>       - `docker run -it -v %CD%\data:C:\trunk\outputDirectory bci2000:latest`
 >   - modify the CMakeLists.txt
 >   - `cmake .`
->   - `MSBuild CMakeFiles/%VCXPROJ_to_be_built%`
->   - `powershell Copy-Item "%VCXPROJ_that_was_built%" -Destination "C:\trunk\outputDirectory"`
+>   - `MSBuild CMakeFiles/.../%VCXPROJ_to_be_built%`
+>   - `powershell Copy-Item "CMakeFiles/.../%VCXPROJ_that_was_built%" -Destination "C:\trunk\outputDirectory"`

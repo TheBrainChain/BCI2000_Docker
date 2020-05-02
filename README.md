@@ -12,13 +12,17 @@ The current example will download and install all source code and packages and t
 + mkdir data && docker run -v %CD%\data:C:\trunk\outputDirectory bci2000:latest
 
 # To test:
-`cd data && bci_dat2stream.exe < eeg1_1.dat | bci_stream2prm > eeg1_1.prm`
+From the host machine (not container)
+- `cd data && bci_dat2stream.exe < eeg1_1.dat | bci_stream2prm > eeg1_1.prm`
 
-# Limitations
-Currently doesn't support building any projects that have QT dependencies
+# Notes
+    - Currently doesn't support building any projects that have QT dependencies
+    - Tested with BCI2000 R6113 on a Windows 10 machine
 
 # To modify the solutions that are generated:
->    - `mkdir build docker run -v %CD%\build:C:\trunk\build bci2000:latest`
->    - modify the CMakeLists.txt
->    - `cmake .`
->    - `MSBuild CMakeFiles/%pathToVCXPROJ`
+>   - Enter the container:
+>       - `docker run -v %CD%\data:C:\trunk\outputDirectory bci2000:latest`
+>   - modify the CMakeLists.txt
+>   - `cmake .`
+>   - `MSBuild CMakeFiles/%VCXPROJ_to_be_built%`
+>   - `powershell Copy-Item "%VCXPROJ_that_was_built%" -Destination "C:\trunk\outputDirectory"`
